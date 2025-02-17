@@ -68,7 +68,6 @@ streamlit run app.py
 
 ## 📌 **Future Enhancements**  
 
-🧠 **AI Chatbot** – Integrate a chatbot for **personalized** recommendations.  
 🔗 **Multi-Vendor Support** – Compare products across **Amazon, Flipkart, and eBay**.  
 
 ---
