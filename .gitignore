@@ -1,0 +1,6 @@
+# Ignore specific folders
+data/
+
+# Ignore virtual environment
+venv/
+*.env
