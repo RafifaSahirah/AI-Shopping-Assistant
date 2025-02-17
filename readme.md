@@ -2,8 +2,6 @@
 
 This project is an AI-powered shopping assistant that recommends products based on user queries. It uses **sentence embeddings** and **FAISS** for fast similarity search. Additionally, it leverages **Large Language Models (LLMs)** to generate summaries from research, providing users with concise insights on products.  
 
-## 📂 Dataset    
-
 ---
 
 ## ✨ **Key Features**  
