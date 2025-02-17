@@ -15,14 +15,6 @@ if user_query:
     st.subheader("🔍 **Recommended Products**")
 
     if recommendations:
-        for product in recommendations:
-            st.markdown(f"""
-            **🛒 {product["name"]}**  
-            💰 Price: **${product["actual_price"]}**  
-            ⭐️ *{product["ratings"]}*  
-            ---
-            """)
-
         # Generate and Display Summary (Only if there are multiple products)
         if len(recommendations) >= 1:
             summary = generate_summary(recommendations)
