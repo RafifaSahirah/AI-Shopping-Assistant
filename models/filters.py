@@ -39,12 +39,12 @@ def recommend_products(user_query, search_faiss):
         elif filter_type == "min":
             min_price = value
 
-    # 🔹 Search FAISS
+    # Search FAISS
     results = search_faiss(user_query, price=min_price, top_k=5)
 
-    # 🔹 Filter strictly by price
+    # Filter strictly by price
     filtered_results = [p for p in results if min_price <= p["actual_price"] <= max_price]
 
-    # 🔹 Return strictly matched results only
+    # Return strictly matched results only
     return filtered_results
 
