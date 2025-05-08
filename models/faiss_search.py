@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 from models.config import INDEX_PATH, METADATA_PATH, MODEL_NAME
 from models.chatbot import chatbot_response
 
-# ✅ Fix: Disable parallelism warning
+# Fix: Disable parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # Load product data and embeddings
@@ -43,13 +43,15 @@ def generate_summary(results):
 
 def search_faiss(query, price=0, rating=0, top_k=5):
     """Search FAISS index using query, price, and rating normalization."""
+    
+    # Convert the search query into a numerical vector (embedding)
     query_embedding = embedding_model.encode([query], convert_to_numpy=True).astype(np.float32)
 
     # Normalize price & rating (avoid division by zero)
     normalized_price = np.array([[price / max_price]], dtype=np.float32) if max_price > 0 else np.array([[0]], dtype=np.float32)
     normalized_rating = np.array([[rating / max_rating]], dtype=np.float32) if max_rating > 0 else np.array([[0]], dtype=np.float32)
 
-    # Reshape to (1,1)
+    # Make sure in the correct shape (1 row, 1 column)
     normalized_price = normalized_price.reshape(1, -1)
     normalized_rating = normalized_rating.reshape(1, -1)
 
@@ -58,9 +60,10 @@ def search_faiss(query, price=0, rating=0, top_k=5):
 
     print("Query embedding shape:", query_embedding.shape)  # Debugging
 
-    # FAISS search
+    # Search the FAISS index to find the top_k most similar products
     distances, indices = faiss_index.search(query_embedding, top_k)
 
+    # Retrieve and format the top_k search results from the dataframe
     results = [
         {
             "name": df.iloc[idx]["name"],
