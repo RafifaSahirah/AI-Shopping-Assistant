@@ -1,5 +1,6 @@
 # Ignore specific folders
 data/
+models/
 
 # Ignore virtual environment
 venv/
