@@ -1,6 +1,6 @@
 import streamlit as st
-from models.faiss_search import search_faiss, generate_summary
-from models.filters import recommend_products
+from faiss_search import search_faiss, generate_summary
+from filters import recommend_products
 
 # Streamlit UI
 st.title("🛍️ AI Shopping Assistant")
