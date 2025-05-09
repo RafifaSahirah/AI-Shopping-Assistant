@@ -3,8 +3,8 @@ import pickle
 import numpy as np
 import os
 from sentence_transformers import SentenceTransformer
-from models.config import INDEX_PATH, METADATA_PATH, MODEL_NAME
-from models.chatbot import chatbot_response
+from config import INDEX_PATH, METADATA_PATH, MODEL_NAME
+from chatbot import chatbot_response
 
 # Fix: Disable parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -28,13 +28,14 @@ embedding_model = SentenceTransformer(MODEL_NAME)
 def generate_summary(results):
     """Generate a structured summary ensuring name, price, and ratings are included."""
     product_info = "\n".join([
-        f"- {item['name']} (Price: ${item['actual_price']}, Rating: {item['ratings']}⭐)"
+        f"- {item['name']} (Price: ₹{item['actual_price']}, Rating: {item['ratings']}⭐)"
         for item in results
     ])
     
     prompt = (
         "Summarize these product recommendations in a friendly tone. "
         "Ensure each product includes its name, price (in ₹), and ratings. "
+        "Show the product in a point list."
         "Do not omit any information:\n"
         f"{product_info}"
     )
