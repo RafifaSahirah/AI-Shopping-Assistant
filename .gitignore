@@ -5,3 +5,4 @@ models/
 # Ignore virtual environment
 venv/
 *.env
+.vscode
